@@ -6,6 +6,8 @@ import imutils
 
 #crop and threshold each frame
 img = cv2.imread("./test-images/test-image-02.png")
+cv2.imshow("window", img)
+cv2.waitKey(0)
 crop_img = img[965:1005, 105:230]
 grey_crop = cv2.cvtColor(crop_img, cv2.COLOR_BGR2GRAY)
 x, threshed = cv2.threshold(grey_crop, 127, 255, cv2.THRESH_BINARY)

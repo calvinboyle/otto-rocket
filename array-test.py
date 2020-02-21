@@ -50,7 +50,7 @@ while success:
     time = count*jump
     
     #crop and threshold each frame
-    crop_img = image[965:1000, 105:230]
+    crop_img = image[965:1000, 275:375]
     grey_crop = cv2.cvtColor(crop_img, cv2.COLOR_BGR2GRAY)
     blurred = cv2.GaussianBlur(grey_crop, (3,3),0)
     x, threshed = cv2.threshold(blurred, 127, 255, cv2.THRESH_BINARY)
@@ -69,21 +69,25 @@ while success:
     for c in cnts_sorted:
         (x, y, w, h) = cv2.boundingRect(c)
         match_score = []
-        #cut digits into individual imgs
-        digit_im = threshed[y:y+30, x:x+20]
-        #cv2.imshow("digit", digit_im)
-        #cv2.waitKey(0)
-        #cv2.destroyAllWindows()
-        value += str(digit_test(digit_im))
+        if w > 10 and h > 10:
 
-    output.append([int(value), time])
+            #cut digits into individual imgs
+            digit_im = threshed[y:y+30, x:x+20]
+            #cv2.imshow("digit", digit_im)
+            #cv2.waitKey(0)
+            #cv2.destroyAllWindows()
+            value += str(digit_test(digit_im))
+        else:
+            value += '.'
+
+    output.append([float(value), time])
 
     count+=1
     cap.set(cv2.CAP_PROP_POS_MSEC, (count*jump))
     success,image = cap.read()
 
 
-workbook = xlsxwriter.Workbook('data.xlsx')
+workbook = xlsxwriter.Workbook('alt_data.xlsx')
 worksheet = workbook.add_worksheet()
 
 col = 0

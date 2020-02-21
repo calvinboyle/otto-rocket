@@ -85,7 +85,7 @@ while success:
     success,image = cap.read()
 
 
-workbook = xlsxwriter.Workbook('alt_data.xlsx')
+workbook = xlsxwriter.Workbook('vel_data.xlsx')
 worksheet = workbook.add_worksheet()
 
 col = 0

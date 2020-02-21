@@ -48,8 +48,6 @@ cv2.destroyAllWindows()
 cnts = cv2.findContours(threshed.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 cnts = imutils.grab_contours(cnts)
 
-digitCnts = []
-
 # for c in cnts:
 #     (x, y, w, h) = cv2.boundingRect(c)
 #     match_score = []
